@@ -1,0 +1,1068 @@
+--- START OF FILE yesStarSolar system.html ---
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سٹار سولر سسٹم - سولر پینل سمت و زاویہ</title> <!-- Name corrected here -->
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Poppins and Noto Naskh Urdu Fonts CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Urdu:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Naskh Urdu', 'Poppins', sans-serif;
+            background-color: #f0f4f8; /* Light background */
+            color: #333;
+            line-height: 1.6;
+        }
+        .font-urdu {
+            font-family: 'Noto Naskh Urdu', sans-serif;
+        }
+         .font-poppins {
+             font-family: 'Poppins', sans-serif;
+         }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #3b82f6; /* Blue 500 */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb; /* Blue 600 */
+        }
+         .btn-secondary {
+            background-color: #6b7280; /* Gray 500 */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #4b5563; /* Gray 600 */
+        }
+
+        .input-field {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            direction: ltr; /* Ensure numbers are entered left-to-right */
+            text-align: left; /* Align text left for numbers */
+        }
+        .input-field::placeholder {
+             text-align: right; /* Placeholder can be RTL */
+             direction: rtl;
+        }
+
+         .result-text {
+             font-size: 1.1em;
+             font-weight: bold;
+             margin-bottom: 10px;
+         }
+
+         /* SVG container styles */
+        .svg-container {
+            width: 100%;
+            max-width: 300px; /* Max width for each individual visual */
+            margin: 20px auto; /* Center the container */
+            background-color: #e2e8f0; /* Light background for visual area */
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 10px; /* Add some padding inside the container */
+            box-sizing: border-box;
+        }
+
+         #combinedVisualContainer {
+             max-width: 500px; /* Combined visual can be wider */
+         }
+
+         /* Basic SVG element styles */
+        .svg-panel {
+            fill: #4f46e5; /* Indigo 600 */
+            stroke: #3730a3; /* Indigo 800 */
+            stroke-width: 2;
+            rx: 5; /* Rounded corners */
+        }
+        .svg-sunlight {
+            stroke: #fbbf24; /* Amber 400 */
+            stroke-width: 3;
+             stroke-dasharray: 8, 4; /* Dashed line */
+            marker-end: url(#arrowhead-sun); /* Add arrowhead */
+        }
+         .svg-tilt-arc {
+             fill: none;
+             stroke: #10b981; /* Green 500 */
+             stroke-width: 2;
+             stroke-dasharray: 5, 5;
+         }
+         .svg-tilt-line {
+             stroke: #059669; /* Green 600 */
+             stroke-width: 2;
+         }
+        .svg-base {
+            stroke: #4a5568; /* Gray 700 */
+            stroke-width: 3;
+             stroke-linecap: round;
+        }
+         .svg-compass-circle {
+             fill: none;
+             stroke: #ccc;
+             stroke-width: 1;
+         }
+         .svg-compass-line {
+             stroke: #4a5568; /* Gray 700 */
+             stroke-width: 1;
+         }
+         .svg-compass-label-urdu {
+             font-family: 'Noto Naskh Urdu', sans-serif;
+             font-size: 14px;
+             text-anchor: middle;
+             fill: #4a5568; /* Gray 700 */
+         }
+          .svg-compass-label-en {
+             font-family: 'Poppins', sans-serif;
+             font-size: 10px;
+             text-anchor: middle;
+             fill: #6b7280; /* Gray 500 */
+         }
+          .svg-compass-pointer {
+              stroke: #dc2626; /* Red */
+              stroke-width: 4; /* Thicker pointer */
+              marker-end: url(#arrowhead-red);
+               fill: none; /* Ensure no fill */
+          }
+         .svg-info-text {
+             font-family: 'Noto Naskh Urdu', sans-serif;
+             font-size: 14px;
+             fill: #333;
+         }
+
+    </style>
+</head>
+<body class="font-urdu">
+
+    <header class="bg-blue-600 text-white text-center py-4 mb-6">
+        <h1 class="text-3xl font-bold">سٹار سولر سسٹم</h1> <!-- Name corrected here -->
+        <p class="text-sm">سولر پینل سمت و زاویہ رہنمائی</p>
+    </header>
+
+    <main class="container mx-auto px-4">
+
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">لوکیشن منتخب کریں</h2>
+
+            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                 <div class="flex-1">
+                    <button id="getLocationBtn" class="btn-secondary w-full">میری موجودہ لوکیشن حاصل کریں</button>
+                </div>
+                <div class="flex-1 flex items-center gap-2">
+                    <label for="manualLocationSelect" class="w-auto whitespace-nowrap">یا شہر منتخب کریں:</label>
+                    <select id="manualLocationSelect" class="input-field flex-grow">
+                        <option value="">شہر منتخب کریں</option>
+                        <!-- Sample locations with data attributes for lat/lon -->
+                        <option value="Lahore" data-lat="31.5820" data-lon="74.3294">لاہور، پاکستان</option>
+                        <option value="Karachi" data-lat="24.8607" data-lon="67.0011">کراچی، پاکستان</option>
+                        <option value="Islamabad" data-lat="33.7294" data-lon="73.0931">اسلام آباد، پاکستان</option>
+                        <option value="Multan" data-lat="30.1575" data-lon="71.5249">ملتان، پاکستان</option>
+                        <option value="Faisalabad" data-lat="31.4504" data-lon="73.1350">فیصل آباد، پاکستان</option>
+                         <option value="Peshawar" data-lat="34.0151" data-lon="71.5249">پشاور، پاکستان</option>
+                         <option value="Quetta" data-lat="30.1798" data-lon="67.0995">کوئٹہ، پاکستان</option>
+                        <!-- Add more locations as needed -->
+                    </select>
+                </div>
+            </div>
+
+             <div class="flex flex-col md:flex-row gap-4 mb-4"> <!-- Added mb-4 for spacing -->
+                 <div class="flex-1 flex items-center gap-2">
+                     <label for="manualLatInput" class="w-auto whitespace-nowrap">یا طول بلد (Latitude):</label>
+                     <input type="number" step="any" id="manualLatInput" class="input-field flex-grow" placeholder="مثلاً 31.5820">
+                 </div>
+                 <div class="flex-1 flex items-center gap-2">
+                     <label for="manualLonInput" class="w-auto whitespace-nowrap">اور عرض بلد (Longitude):</label>
+                     <input type="number" step="any" id="manualLonInput" class="input-field flex-grow" placeholder="مثلاً 74.3294">
+                 </div>
+             </div>
+
+             <!-- Season Selection Dropdown - Added Here -->
+             <div class="flex items-center gap-2">
+                 <label for="seasonSelect" class="w-auto whitespace-nowrap">موسم منتخب کریں:</label>
+                 <select id="seasonSelect" class="input-field flex-grow">
+                     <option value="year-round">سال بھر</option>
+                     <option value="summer">گرمیوں</option>
+                     <option value="winter">سردیوں</option>
+                 </select>
+             </div>
+
+
+             <div id="locationStatus" class="mt-4 text-sm text-gray-600 hidden"></div>
+             <div id="currentLocation" class="mt-2 text-sm text-blue-700 font-semibold hidden"></div>
+
+        </div>
+
+        <div class="text-center mb-6">
+             <button id="calculateBtn" class="btn-primary text-lg font-semibold px-8 py-3" disabled>سمت اور زاویہ حساب کریں</button>
+        </div>
+
+
+        <div id="resultsCard" class="card hidden">
+            <h2 class="text-xl font-semibold mb-4">تجویز کردہ سمت و زاویہ (<span id="selectedSeasonDisplay"></span> کے لیے)</h2> <!-- Added span to show selected season -->
+
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                 <div class="md:w-1/2 w-full">
+                    <div id="resultDirection" class="result-text">تجویز کردہ سمت: -</div>
+                    <div id="resultTilt" class="result-text">تجویز کردہ زاویہ (افقی سے): -</div>
+                     <p class="text-sm text-gray-700 mt-4 leading-relaxed">
+                         یہ نتائج لوکیشن کے طول بلد (latitude) کی بنیاد پر سال بھر کے لیے زیادہ سے زیادہ توانائی حاصل کرنے کی ایک عام تجویز ہے۔
+                         موسم کے لحاظ سے یا مخصوص سائٹ پر رکاوٹوں (عمارتیں، درخت) کی صورت میں مختلف زاویوں کی ضرورت ہو سکتی ہے۔
+                         <br>
+                         شمالی نصف کرہ (طول بلد > 0) میں پینل کا رخ عام طور پر <span class="font-bold">جنوب</span> کی طرف ہوتا ہے۔ جنوبی نصف کرہ (طول بلد < 0) میں <span class="font-bold">شمال</span> کی طرف۔
+                     </p>
+                 </div>
+                 <div class="md:w-1/2 w-full">
+                     <h3 class="text-lg font-semibold mb-2 text-center">بصری خاکے</h3>
+
+                     <div class="svg-container" id="directionVisualContainer">
+                         <p class="text-center text-sm text-gray-600 mb-2">سمت کا خاکہ:</p>
+                         <div id="directionVisual">
+                            <!-- Direction SVG will be drawn here -->
+                         </div>
+                     </div>
+
+                      <div class="svg-container" id="tiltVisualContainer">
+                          <p class="text-center text-sm text-gray-600 mb-2">زاویے کا خاکہ:</p>
+                          <div id="tiltVisual">
+                              <!-- Tilt SVG will be drawn here -->
+                          </div>
+                     </div>
+
+                      <div class="svg-container" id="combinedVisualContainer">
+                          <p class="text-center text-sm text-gray-600 mb-2">مکمل خاکہ:</p>
+                          <div id="combinedVisual">
+                               <!-- Combined SVG will be drawn here -->
+                          </div>
+                     </div>
+
+                 </div>
+            </div>
+        </div>
+
+    </main>
+
+     <footer class="text-center text-gray-600 text-sm py-6 mt-8 border-t border-gray-200">
+         &copy; 2023 سٹار سولر سسٹم. تمام حقوق محفوظ ہیں۔ <!-- Name corrected here -->
+     </footer>
+
+
+    <script>
+        const getLocationBtn = document.getElementById('getLocationBtn');
+        const manualLocationSelect = document.getElementById('manualLocationSelect');
+        const manualLatInput = document.getElementById('manualLatInput');
+        const manualLonInput = document.getElementById('manualLonInput');
+        const seasonSelect = document.getElementById('seasonSelect'); // Added season select
+        const calculateBtn = document.getElementById('calculateBtn');
+        const locationStatusDiv = document.getElementById('locationStatus');
+        const currentLocationDiv = document.getElementById('currentLocation');
+        const resultsCard = document.getElementById('resultsCard');
+        const resultDirectionDiv = document.getElementById('resultDirection');
+        const resultTiltDiv = document.getElementById('resultTilt');
+        const selectedSeasonDisplay = document.getElementById('selectedSeasonDisplay'); // Added element to display selected season
+
+
+        // Containers for the separate visuals
+        const directionVisualDiv = document.getElementById('directionVisual');
+        const tiltVisualDiv = document.getElementById('tiltVisual');
+        const combinedVisualDiv = document.getElementById('combinedVisual');
+
+
+        let currentLatitude = null;
+        let currentLongitude = null;
+
+        // Define cardinal direction labels and their standard compass angles (0=North, 90=East, etc.)
+        const directionData = {
+            0: { ur: 'شمال', en: 'N' },
+            45: { ur: 'شمال مشرق', en: 'NE' },
+            90: { ur: 'مشرق', en: 'E' },
+            135: { ur: 'جنوب مشرق', en: 'SE' },
+            180: { ur: 'جنوب', en: 'S' },
+            225: { ur: 'جنوب مغرب', en: 'SW' },
+            270: { ur: 'مغرب', en: 'W' },
+            315: { ur: 'شمال مغرب', en: 'NW' },
+            360: { ur: 'شمال', en: 'N' } // 360 is same as 0
+        };
+
+        // Map season values to Urdu text for display
+        const seasonLabelsUrdu = {
+            'year-round': 'سال بھر',
+            'summer': 'گرمیوں',
+            'winter': 'سردیوں'
+        };
+
+         // Function to get the closest Urdu direction label for a given angle (0-360 degrees)
+         function getUrduDirectionLabel(angle) {
+             // Normalize angle to be between 0 and 360
+             angle = (angle % 360 + 360) % 360;
+
+             let closestAngle = 0;
+             let minDiff = 360;
+
+             for (const compassAngle in directionData) {
+                 const diff = Math.abs(angle - parseInt(compassAngle));
+                 // Consider wrap-around difference (e.g., 350 vs 10 degrees)
+                 const wrapAroundDiff = 360 - diff;
+                 const actualDiff = Math.min(diff, wrapAroundDiff);
+
+                 if (actualDiff < minDiff) {
+                     minDiff = actualDiff;
+                     closestAngle = parseInt(compassAngle);
+                 }
+             }
+             return directionData[closestAngle].ur;
+         }
+
+         // Function to get the standard compass angle (0-360) for a given Urdu direction label
+         function getCompassAngleFromUrduLabel(label) {
+             for (const angle in directionData) {
+                 if (directionData[angle].ur === label) {
+                     return parseInt(angle);
+                 }
+             }
+             return 0; // Default to North if not found (shouldn't happen with valid labels)
+         }
+
+
+        // --- Location Handling ---
+
+        function showLocationStatus(message, isError = false) {
+            locationStatusDiv.textContent = message;
+            locationStatusDiv.classList.remove('hidden', 'text-gray-600', 'text-red-600');
+            locationStatusDiv.classList.add(isError ? 'text-red-600' : 'text-gray-600');
+             if (!message) locationStatusDiv.classList.add('hidden');
+        }
+
+        function showCurrentLocation(lat, lon, method) {
+             let methodText = '';
+             if (method === 'geo') methodText = ' (موجودہ)';
+             if (method === 'select') methodText = ' (منتخب شدہ شہر)';
+             if (method === 'manual') methodText = ' (دستی اندراج)';
+
+             currentLocationDiv.textContent = `منتخب کردہ لوکیشن${methodText}: طول بلد ${lat.toFixed(4)}، عرض بلد ${lon.toFixed(4)}`;
+             currentLocationDiv.classList.remove('hidden');
+        }
+
+        // This function sets the active location and updates UI based on the method used
+        function setLocation(lat, lon, method) {
+            currentLatitude = lat;
+            currentLongitude = lon;
+            showCurrentLocation(lat, lon, method);
+            calculateBtn.disabled = false; // Enable calculate button
+            showLocationStatus('', false); // Clear status message
+            resultsCard.classList.add('hidden'); // Hide previous results
+
+             // Automatically trigger calculation with the current season once location is set
+            triggerCalculation();
+        }
+
+        // This function resets the location state and all input fields
+        function clearAllLocationInputsAndState() {
+             currentLatitude = null;
+             currentLongitude = null;
+             calculateBtn.disabled = true; // Disable calculate button
+             showLocationStatus('', false);
+             currentLocationDiv.classList.add('hidden');
+             resultsCard.classList.add('hidden');
+             manualLocationSelect.value = "";
+             manualLatInput.value = "";
+             manualLonInput.value = "";
+             seasonSelect.value = "year-round"; // Reset season to default
+        }
+
+        // This function handles manual input validation and setting the location if valid
+        function handleManualInput() {
+            const latValue = manualLatInput.value.trim();
+            const lonValue = manualLonInput.value.trim();
+
+            const lat = parseFloat(latValue);
+            const lon = parseFloat(lonValue);
+
+            // Check if both fields have something entered
+            if (latValue !== "" || lonValue !== "") {
+                 // Check if both are valid numbers and within range
+                 if (!isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180) {
+                     // Valid manual input
+                     setLocation(lat, lon, 'manual');
+                     // Clear other input methods (optional, but good for clarity)
+                     manualLocationSelect.value = "";
+                     showLocationStatus('دستی لوکیشن درج ہو گئی۔', false); // Info message
+                 } else {
+                     // Invalid manual input
+                     currentLatitude = null; // Clear state
+                     currentLongitude = null;
+                     calculateBtn.disabled = true; // Disable calculation
+                     currentLocationDiv.classList.add('hidden'); // Hide location display
+                     resultsCard.classList.add('hidden'); // Hide results
+
+                     // Show error message only if something was actually typed but is invalid
+                     if (latValue !== "" || lonValue !== "") {
+                         showLocationStatus('براہ کرم طول بلد (-90 سے 90) اور عرض بلد (-180 سے 180) کی درست حدود میں نمبر درج کریں۔', true);
+                     } else {
+                         showLocationStatus('', false); // Clear status if fields became empty
+                     }
+                 }
+            } else {
+                // Both fields are empty, effectively clearing manual input
+                currentLatitude = null; // Clear state
+                currentLongitude = null;
+                calculateBtn.disabled = true; // Disable calculation
+                currentLocationDiv.classList.add('hidden'); // Hide location display
+                resultsCard.classList.add('hidden'); // Hide results
+                 showLocationStatus('', false); // Clear status message
+            }
+        }
+
+
+        getLocationBtn.addEventListener('click', () => {
+            if (navigator.geolocation) {
+                showLocationStatus('لوکیشن حاصل کی جا رہی ہے...', false);
+                calculateBtn.disabled = true; // Disable while fetching
+                manualLocationSelect.value = ""; // Clear other input methods immediately
+                manualLatInput.value = "";
+                manualLonInput.value = "";
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        setLocation(position.coords.latitude, position.coords.longitude, 'geo');
+                    },
+                    (error) => {
+                        let errorMessage = 'لوکیشن حاصل کرنے میں ناکامی۔';
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage += " یوزر نے لوکیشن کی اجازت نہیں دی۔";
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage += " لوکیشن کی معلومات دستیاب نہیں۔";
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage += " لوکیشن کی درخواست کا وقت ختم ہو گیا۔";
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                errorMessage += " ایک نامعلوم خرابی پیش آئی۔";
+                                break;
+                        }
+                        showLocationStatus(errorMessage + " براہ کرم دستی انتخاب استعمال کریں۔", true);
+                        clearAllLocationInputsAndState(); // Reset everything on geo error
+                    }
+                );
+            } else {
+                showLocationStatus("آپ کا براؤزر جیو لوکیشن کو سپورٹ نہیں کرتا۔ براہ کرم دستی انتخاب استعمال کریں۔", true);
+                 clearAllLocationInputsAndState(); // Reset everything if geo is not supported
+            }
+        });
+
+        manualLocationSelect.addEventListener('change', (event) => {
+            const selectedOption = event.target.options[event.target.selectedIndex];
+            const lat = selectedOption.getAttribute('data-lat');
+            const lon = selectedOption.getAttribute('data-lon');
+
+            if (lat && lon) {
+                setLocation(parseFloat(lat), parseFloat(lon), 'select');
+                 // Clear other input methods
+                 manualLatInput.value = "";
+                 manualLonInput.value = "";
+                 showLocationStatus(`منتخب کردہ شہر: ${selectedOption.text}`, false);
+            } else {
+                // Empty option selected
+                clearAllLocationInputsAndState(); // Reset everything
+                showLocationStatus('براہ کرم ایک شہر منتخب کریں۔', false); // Show info, not error
+            }
+        });
+
+        // Listen for input changes in manual fields
+        manualLatInput.addEventListener('input', handleManualInput);
+        manualLonInput.addEventListener('input', handleManualInput);
+
+        // Listen for season selection change
+        seasonSelect.addEventListener('change', () => {
+            if (currentLatitude !== null) {
+                // If location is already set, trigger recalculation with the new season
+                triggerCalculation();
+            }
+        });
+
+
+        // --- Calculation Logic ---
+        // Modified to accept season
+        function calculateSolarPanelSettings(latitude, season) {
+            // Basic tilt calculation based on absolute latitude and season
+            let baseTilt = Math.abs(latitude);
+            let calculatedTilt;
+
+            switch (season) {
+                case 'summer':
+                    calculatedTilt = baseTilt - 15;
+                    break;
+                case 'winter':
+                    calculatedTilt = baseTilt + 15;
+                    break;
+                case 'year-round': // Default
+                default:
+                    calculatedTilt = baseTilt;
+                    break;
+            }
+
+            // Apply capping from original logic (min 10, max 60)
+            // Ensures a reasonable physical angle for the panel
+            let finalTilt = calculatedTilt;
+            if (finalTilt < 10) finalTilt = 10;
+            if (finalTilt > 60) finalTilt = 60;
+
+
+            // Basic direction: South for Northern Hemisphere, North for Southern Hemisphere.
+            // Azimuth angle relative to North (0=N, 90=E, 180=S, 270=W)
+            // This remains consistent regardless of season.
+            let azimuthAngle = latitude >= 0 ? 180 : 0; // 180 for South, 0 for North
+
+            // Get the corresponding Urdu direction label
+            let directionText = getUrduDirectionLabel(azimuthAngle);
+
+            return {
+                direction: directionText,
+                tilt: Math.round(finalTilt), // Round the final angle for display
+                azimuth: azimuthAngle // Include azimuth for drawing the compass pointer
+            };
+        }
+
+
+        // --- Visual Output (SVG) ---
+
+        // Helper function to add arrowhead markers to SVG defs
+        function addSvgMarkers(svg) {
+             const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+
+             // Arrowhead for sunlight (points towards the panel)
+             const markerSun = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+             markerSun.setAttribute("id", "arrowhead-sun");
+             markerSun.setAttribute("markerWidth", "10");
+             markerSun.setAttribute("markerHeight", "7");
+             markerSun.setAttribute("refX", "10"); // Point is at the end of the line
+             markerSun.setAttribute("refY", "3.5");
+             markerSun.setAttribute("orient", "auto-start-reverse"); // Point towards the start of the line
+             const polygonSun = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+             polygonSun.setAttribute("points", "0 0, 10 3.5, 0 7");
+             polygonSun.setAttribute("fill", "#fbbf24"); // Same color as sunlight
+             markerSun.appendChild(polygonSun);
+             defs.appendChild(markerSun);
+
+             // Arrowhead for direction pointer (points away from center)
+              const markerRed = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+              markerRed.setAttribute("id", "arrowhead-red");
+              markerRed.setAttribute("markerWidth", "10");
+              markerRed.setAttribute("markerHeight", "7");
+              markerRed.setAttribute("refX", "10"); // Point is at the end of the line
+              markerRed.setAttribute("refY", "3.5");
+              markerRed.setAttribute("orient", "auto"); // Point away from the center
+              const polygonRed = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+              polygonRed.setAttribute("points", "0 0, 10 3.5, 0 7");
+              polygonRed.setAttribute("fill", "#dc2626"); // Red color
+              markerRed.appendChild(polygonRed);
+              defs.appendChild(markerRed);
+
+             svg.appendChild(defs);
+        }
+
+        // Draw only the Tilt Angle Visual
+        function drawTiltSVG(tiltAngle) {
+            tiltVisualDiv.innerHTML = ''; // Clear previous SVG
+
+            const containerWidth = tiltVisualDiv.clientWidth || 300;
+            const svgWidth = containerWidth;
+            const svgHeight = containerWidth * 0.7; // Aspect ratio for side view
+            const viewBox = `0 0 ${svgWidth} ${svgHeight}`;
+
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", viewBox);
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "100%");
+            svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+            svg.setAttribute("role", "img");
+            svg.setAttribute("aria-label", `Solar panel tilt angle visual: Tilt angle ${tiltAngle} degrees`);
+            addSvgMarkers(svg); // Add markers
+
+            const centerX = svgWidth / 2;
+            const panelBaseY = svgHeight * 0.9; // Position base lower in this view
+
+            // Draw Ground indication
+            const groundLength = svgWidth * 0.8;
+            const baseLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            baseLine.setAttribute("x1", centerX - groundLength / 2);
+            baseLine.setAttribute("y1", panelBaseY);
+            baseLine.setAttribute("x2", centerX + groundLength / 2);
+            baseLine.setAttribute("y2", panelBaseY);
+            baseLine.setAttribute("class", "svg-base");
+            svg.appendChild(baseLine);
+
+            // Solar Panel
+            const panelWidth = svgWidth * 0.4;
+            const panelHeight = panelWidth * 0.5; // Aspect ratio
+            const panelPivotX = centerX;
+            const panelPivotY = panelBaseY;
+
+            const panelRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            panelRect.setAttribute("x", -panelWidth / 2);
+            panelRect.setAttribute("y", -panelHeight);
+            panelRect.setAttribute("width", panelWidth);
+            panelRect.setAttribute("height", panelHeight);
+            panelRect.setAttribute("class", "svg-panel");
+
+            const panelGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            panelGroup.setAttribute("transform", `translate(${panelPivotX}, ${panelPivotY}) rotate(${-tiltAngle} 0 0)`); // Rotate based on tilt
+            panelGroup.appendChild(panelRect);
+            svg.appendChild(panelGroup);
+
+             // Sunlight Line (simplified - just illustrative)
+             const sunRayLength = panelWidth * 1.5;
+             // Position the ray to hit roughly the middle of the panel from above
+             const rayEndPointX = panelPivotX;
+             const rayEndPointY = panelPivotY - panelHeight / 2 * Math.cos(0); // Target roughly middle height at 0 rotation
+              // Rotate the end point based on panel angle to align the sunlight
+             const rayEndPointX_rotated = panelPivotX + (rayEndPointX - panelPivotX) * Math.cos((-tiltAngle) * Math.PI / 180) - (rayEndPointY - (panelPivotY - panelHeight / 2)) * Math.sin((-tiltAngle) * Math.PI / 180);
+             const rayEndPointY_rotated = panelPivotY + panelHeight / 2 + (rayEndPointX - panelPivotX) * Math.sin((-tiltAngle) * Math.PI / 180) + (rayEndPointY - (panelPivotY - panelHeight / 2)) * Math.cos((-tiltAngle) * Math.PI / 180);
+
+
+             // Calculate ray start point from end point based on panel angle
+             const rayStartX = rayEndPointX_rotated - sunRayLength * Math.cos((-tiltAngle) * Math.PI / 180);
+             const rayStartY = rayEndPointY_rotated - sunRayLength * Math.sin((-tiltAngle) * Math.PI / 180);
+
+
+             const sunRay = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             sunRay.setAttribute("x1", rayStartX);
+             sunRay.setAttribute("y1", rayStartY);
+             sunRay.setAttribute("x2", rayEndPointX_rotated); // Ray points towards the panel
+             sunRay.setAttribute("y2", rayEndPointY_rotated);
+             sunRay.setAttribute("class", "svg-sunlight");
+             svg.appendChild(sunRay);
+
+
+             // Tilt Angle Indicator
+             const arcRadius = panelHeight * 0.5;
+             const arcStartX = centerX + arcRadius; // Start on the horizontal line
+             const arcStartY = panelBaseY;
+             // Endpoint of the arc on the panel's tilt line (relative to horizontal)
+             // Angle is negative because SVG rotation is clockwise, tilt angle is counter-clockwise from horizontal
+             const arcEndX = centerX + arcRadius * Math.cos((-tiltAngle) * Math.PI / 180);
+             const arcEndY = panelBaseY + arcRadius * Math.sin((-tiltAngle) * Math.PI / 180); // Note: Y increases downwards in SVG
+
+             const tiltArcPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+             // M = Move to, A = Arc (rx ry x-axis-rotation large-arc-flag sweep-flag x y)
+             // large-arc-flag (0 or 1): 1 if arc is > 180 deg, 0 otherwise. Always 0 for tilt < 90.
+             // sweep-flag (0 or 1): 1 for clockwise arc, 0 for counter-clockwise. Need 0 for standard tilt arc.
+             tiltArcPath.setAttribute("d", `M ${arcStartX},${arcStartY} A ${arcRadius},${arcRadius} 0 0,0 ${arcEndX},${arcEndY}`);
+             tiltArcPath.setAttribute("class", "svg-tilt-arc");
+             svg.appendChild(tiltArcPath);
+
+             // Angle Text
+             // Position text roughly in the middle of the arc. Angle is half the tilt.
+             const textAngleRad = (-tiltAngle / 2) * Math.PI / 180; // Convert to radians for Math functions
+             const angleTextX = centerX + (arcRadius + 15) * Math.cos(textAngleRad);
+             const angleTextY = panelBaseY + (arcRadius + 15) * Math.sin(textAngleRad); // Note: Y increases downwards
+             const angleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+             angleText.setAttribute("x", angleTextX);
+             angleText.setAttribute("y", angleTextY);
+             angleText.setAttribute("dominant-baseline", "middle");
+             angleText.setAttribute("text-anchor", "middle");
+             angleText.setAttribute("class", "svg-info-text");
+             angleText.textContent = `${tiltAngle}°`;
+             svg.appendChild(angleText);
+
+
+            tiltVisualDiv.appendChild(svg);
+        }
+
+
+        // Draw only the Direction (Compass) Visual
+        function drawDirectionSVG(azimuthAngle) {
+            directionVisualDiv.innerHTML = ''; // Clear previous SVG
+
+            const containerWidth = directionVisualDiv.clientWidth || 300;
+            const svgWidth = containerWidth;
+            const svgHeight = containerWidth; // Square aspect ratio for compass
+            const viewBox = `0 0 ${svgWidth} ${svgHeight}`;
+
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", viewBox);
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "100%");
+            svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+            svg.setAttribute("role", "img");
+            svg.setAttribute("aria-label", `Solar panel direction visual: Azimuth angle ${azimuthAngle} degrees`);
+            addSvgMarkers(svg); // Add markers
+
+            const centerX = svgWidth / 2;
+            const centerY = svgHeight / 2;
+            const compassRadius = svgWidth * 0.3; // Radius of the compass circle/labels
+
+             // Draw compass circle
+             const compassCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+             compassCircle.setAttribute("cx", centerX);
+             compassCircle.setAttribute("cy", centerY);
+             compassCircle.setAttribute("r", compassRadius);
+             compassCircle.setAttribute("class", "svg-compass-circle");
+             svg.appendChild(compassCircle);
+
+             // Draw main compass lines (N, S, E, W)
+             const majorLineLength = compassRadius - 10;
+             const minorLineLength = compassRadius - 5;
+
+             // N (0 deg)
+             let lineN = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             lineN.setAttribute("x1", centerX); lineN.setAttribute("y1", centerY);
+             lineN.setAttribute("x2", centerX); lineN.setAttribute("y2", centerY - majorLineLength);
+             lineN.setAttribute("class", "svg-compass-line"); svg.appendChild(lineN);
+             // E (90 deg)
+             let lineE = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             lineE.setAttribute("x1", centerX); lineE.setAttribute("y1", centerY);
+             lineE.setAttribute("x2", centerX + majorLineLength); lineE.setAttribute("y2", centerY);
+             lineE.setAttribute("class", "svg-compass-line"); svg.appendChild(lineE);
+             // S (180 deg)
+             let lineS = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             lineS.setAttribute("x1", centerX); lineS.setAttribute("y1", centerY);
+             lineS.setAttribute("x2", centerX); lineS.setAttribute("y2", centerY + majorLineLength);
+             lineS.setAttribute("class", "svg-compass-line"); svg.appendChild(lineS);
+             // W (270 deg)
+             let lineW = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             lineW.setAttribute("x1", centerX); lineW.setAttribute("y1", centerY);
+             lineW.setAttribute("x2", centerX - majorLineLength); lineW.setAttribute("y2", centerY);
+             lineW.setAttribute("class", "svg-compass-line"); svg.appendChild(lineW);
+
+             // Draw intermediate lines (NE, SE, SW, NW)
+             const anglesDiag = [45, 135, 225, 315];
+             anglesDiag.forEach(angle => {
+                  let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                  line.setAttribute("x1", centerX); line.setAttribute("y1", centerY);
+                  // Convert angle (0=N, 90=E) to SVG coords (0=E, 90=S) for point calculation, then rotate by -90
+                   const svgAngle = angle - 90;
+                   line.setAttribute("x2", centerX + minorLineLength * Math.cos(svgAngle * Math.PI / 180));
+                   line.setAttribute("y2", centerY + minorLineLength * Math.sin(svgAngle * Math.PI / 180));
+                  line.setAttribute("class", "svg-compass-line"); svg.appendChild(line);
+             });
+
+
+             // Compass Labels (Urdu and English)
+             const labelRadius = compassRadius + 15; // Position labels further out
+
+             for (const angle in directionData) {
+                 if (directionData.hasOwnProperty(angle)) {
+                     const { ur, en } = directionData[angle];
+                      // Convert angle (0=N, 90=E) to SVG coords (0=E, 90=S) for point calculation, then rotate by -90
+                     const svgAngle = parseInt(angle) - 90;
+
+                     const labelX = centerX + labelRadius * Math.cos(svgAngle * Math.PI / 180);
+                     const labelY = centerY + labelRadius * Math.sin(svgAngle * Math.PI / 180);
+
+                     // Urdu Label
+                     const textUrdu = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                     textUrdu.setAttribute("x", labelX);
+                     textUrdu.setAttribute("y", labelY - 5); // Position Urdu slightly above English
+                     textUrdu.setAttribute("dominant-baseline", "middle");
+                     textUrdu.setAttribute("text-anchor", "middle");
+                     textUrdu.setAttribute("class", "svg-compass-label-urdu");
+                     textUrdu.textContent = ur;
+                     svg.appendChild(textUrdu);
+
+                      // English Label
+                     const textEn = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                     textEn.setAttribute("x", labelX);
+                     textEn.setAttribute("y", labelY + 10); // Position English slightly below Urdu
+                     textEn.setAttribute("dominant-baseline", "middle");
+                     textEn.setAttribute("text-anchor", "middle");
+                     textEn.setAttribute("class", "svg-compass-label-en");
+                     textEn.textContent = en;
+                     svg.appendChild(textEn);
+                 }
+             }
+
+             // Add a pointer for the target direction from the center of the compass
+             const pointerLength = compassRadius - 5; // Make pointer slightly shorter than inner radius
+             const pointerStartX = centerX;
+             const pointerStartY = centerY;
+
+             // Endpoint calculated using the target direction azimuth angle (0=N, 90=E)
+             // Convert to SVG coords (0=E, 90=S), then rotate by -90.
+             const pointerSvgAngle = azimuthAngle - 90;
+
+             const pointerEndX = pointerStartX + pointerLength * Math.cos(pointerSvgAngle * Math.PI / 180);
+             const pointerEndY = pointerStartY + pointerLength * Math.sin(pointerSvgAngle * Math.PI / 180);
+
+             const pointerLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             pointerLine.setAttribute("x1", pointerStartX);
+             pointerLine.setAttribute("y1", pointerStartY);
+             pointerLine.setAttribute("x2", pointerEndX);
+             pointerLine.setAttribute("y2", pointerEndY);
+             pointerLine.setAttribute("class", "svg-compass-pointer");
+             svg.appendChild(pointerLine);
+
+            directionVisualDiv.appendChild(svg);
+        }
+
+        // Draw Combined Tilt and Direction Visual
+        function drawCombinedSVG(tiltAngle, directionText, azimuthAngle) {
+            combinedVisualDiv.innerHTML = ''; // Clear previous SVG
+
+            const containerWidth = combinedVisualDiv.clientWidth || 500;
+            const svgWidth = containerWidth;
+            const svgHeight = containerWidth * 0.95; // Adjusted height for both
+            const viewBox = `0 0 ${svgWidth} ${svgHeight}`;
+
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", viewBox);
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "100%");
+            svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+            svg.setAttribute("role", "img");
+            svg.setAttribute("aria-label", `Solar panel visual: Tilt angle ${tiltAngle} degrees, facing ${directionText}`);
+            addSvgMarkers(svg); // Add markers
+
+
+            // --- Tilt Visual Part (Top Half) ---
+            const tiltCenterX = svgWidth / 2;
+            const panelBaseY = svgHeight * 0.5; // Panel base position
+            // const tiltHeight = svgHeight * 0.55; // Height allocated for tilt part (not strictly needed for drawing coords)
+
+            // Draw Ground indication
+            const groundLength = svgWidth * 0.7;
+            const baseLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            baseLine.setAttribute("x1", tiltCenterX - groundLength / 2);
+            baseLine.setAttribute("y1", panelBaseY);
+            baseLine.setAttribute("x2", tiltCenterX + groundLength / 2);
+            baseLine.setAttribute("y2", panelBaseY);
+            baseLine.setAttribute("class", "svg-base");
+            svg.appendChild(baseLine);
+
+            // Solar Panel
+            const panelWidth = svgWidth * 0.3;
+            const panelHeight = panelWidth * 0.5;
+            const panelPivotX = tiltCenterX;
+            const panelPivotY = panelBaseY;
+
+            const panelRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            panelRect.setAttribute("x", -panelWidth / 2);
+            panelRect.setAttribute("y", -panelHeight);
+            panelRect.setAttribute("width", panelWidth);
+            panelRect.setAttribute("height", panelHeight);
+            panelRect.setAttribute("class", "svg-panel");
+
+            const panelGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            panelGroup.setAttribute("transform", `translate(${panelPivotX}, ${panelPivotY}) rotate(${-tiltAngle} 0 0)`); // Rotate based on tilt
+            panelGroup.appendChild(panelRect);
+            svg.appendChild(panelGroup);
+
+             // Sunlight Line (simplified - just illustrative)
+             const sunRayLength = panelWidth * 1.5;
+             // Position the ray to hit roughly the middle of the panel from above
+             const rayEndPointX = panelPivotX;
+             const rayEndPointY = panelPivotY - panelHeight / 2 * Math.cos(0); // Target roughly middle height at 0 rotation
+              // Rotate the end point based on panel angle to align the sunlight
+             const rayEndPointX_rotated = panelPivotX + (rayEndPointX - panelPivotX) * Math.cos((-tiltAngle) * Math.PI / 180) - (rayEndPointY - (panelPivotY - panelHeight / 2)) * Math.sin((-tiltAngle) * Math.PI / 180);
+             const rayEndPointY_rotated = panelPivotY + panelHeight / 2 + (rayEndPointX - panelPivotX) * Math.sin((-tiltAngle) * Math.PI / 180) + (rayEndPointY - (panelPivotY - panelHeight / 2)) * Math.cos((-tiltAngle) * Math.PI / 180);
+
+             // Calculate ray start point from end point based on panel angle
+             const rayStartX = rayEndPointX_rotated - sunRayLength * Math.cos((-tiltAngle) * Math.PI / 180);
+             const rayStartY = rayEndPointY_rotated - sunRayLength * Math.sin((-tiltAngle) * Math.PI / 180);
+
+
+             const sunRay = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             sunRay.setAttribute("x1", rayStartX);
+             sunRay.setAttribute("y1", rayStartY);
+             sunRay.setAttribute("x2", rayEndPointX_rotated); // Ray points towards the panel
+             sunRay.setAttribute("y2", rayEndPointY_rotated);
+             sunRay.setAttribute("class", "svg-sunlight");
+             svg.appendChild(sunRay);
+
+             // Tilt Angle Indicator
+             const arcRadius = panelHeight * 0.5;
+             const arcStartX = tiltCenterX + arcRadius; // Start on the horizontal line
+             const arcStartY = panelBaseY;
+             // Endpoint of the arc on the panel's tilt line (relative to horizontal)
+             const arcEndX = tiltCenterX + arcRadius * Math.cos((-tiltAngle) * Math.PI / 180);
+             const arcEndY = panelBaseY + arcRadius * Math.sin((-tiltAngle) * Math.PI / 180); // Note: Y increases downwards
+
+             const tiltArcPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+             tiltArcPath.setAttribute("d", `M ${arcStartX},${arcStartY} A ${arcRadius},${arcRadius} 0 0,0 ${arcEndX},${arcEndY}`);
+             tiltArcPath.setAttribute("class", "svg-tilt-arc");
+             svg.appendChild(tiltArcPath);
+
+            // Angle Text
+             const textAngleRad = (-tiltAngle / 2) * Math.PI / 180;
+             const angleTextX = tiltCenterX + (arcRadius + 15) * Math.cos(textAngleRad);
+             const angleTextY = panelBaseY + (arcRadius + 15) * Math.sin(textAngleRad); // Note: Y increases downwards
+             const angleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+             angleText.setAttribute("x", angleTextX);
+             angleText.setAttribute("y", angleTextY);
+             angleText.setAttribute("dominant-baseline", "middle");
+             angleText.setAttribute("text-anchor", "middle");
+             angleText.setAttribute("class", "svg-info-text");
+             angleText.textContent = `${tiltAngle}°`;
+             svg.appendChild(angleText);
+
+
+             // --- Compass Visual Part (Bottom Half) ---
+             const compassCenterX = svgWidth / 2;
+             const compassCenterY = svgHeight * 0.78; // Position compass lower
+             const compassRadius = svgWidth * 0.2; // Smaller radius for combined view
+
+             // Draw compass circle
+             const compassCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+             compassCircle.setAttribute("cx", compassCenterX);
+             compassCircle.setAttribute("cy", compassCenterY);
+             compassCircle.setAttribute("r", compassRadius);
+             compassCircle.setAttribute("class", "svg-compass-circle");
+             svg.appendChild(compassCircle);
+
+             // Draw main compass lines (N, S, E, W)
+             const majorLineLength = compassRadius - 5;
+             const minorLineLength = compassRadius - 3;
+
+             // N (0 deg)
+             let lineN = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             lineN.setAttribute("x1", compassCenterX); lineN.setAttribute("y1", compassCenterY);
+             lineN.setAttribute("x2", compassCenterX); lineN.setAttribute("y2", compassCenterY - majorLineLength);
+             lineN.setAttribute("class", "svg-compass-line"); svg.appendChild(lineN);
+             // E (90 deg)
+             let lineE = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             lineE.setAttribute("x1", compassCenterX); lineE.setAttribute("y1", compassCenterY);
+             lineE.setAttribute("x2", compassCenterX + majorLineLength); lineE.setAttribute("y2", compassCenterY);
+             lineE.setAttribute("class", "svg-compass-line"); svg.appendChild(lineE);
+             // S (180 deg)
+             let lineS = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             lineS.setAttribute("x1", compassCenterX); lineS.setAttribute("y1", compassCenterY);
+             lineS.setAttribute("x2", compassCenterX); lineS.setAttribute("y2", compassCenterY + majorLineLength);
+             lineS.setAttribute("class", "svg-compass-line"); svg.appendChild(lineS);
+             // W (270 deg)
+             let lineW = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             lineW.setAttribute("x1", compassCenterX); lineW.setAttribute("y1", compassCenterY);
+             lineW.setAttribute("x2", compassCenterX - majorLineLength); lineW.setAttribute("y2", compassCenterY);
+             lineW.setAttribute("class", "svg-compass-line"); svg.appendChild(lineW);
+
+             // Draw intermediate lines (NE, SE, SW, NW)
+             const anglesDiag = [45, 135, 225, 315];
+             anglesDiag.forEach(angle => {
+                  let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                  line.setAttribute("x1", compassCenterX); line.setAttribute("y1", compassCenterY);
+                  // Convert angle (0=N, 90=E) to SVG coords (0=E, 90=S) for point calculation, then rotate by -90
+                   const svgAngle = angle - 90;
+                   line.setAttribute("x2", compassCenterX + minorLineLength * Math.cos(svgAngle * Math.PI / 180));
+                   line.setAttribute("y2", compassCenterY + minorLineLength * Math.sin(svgAngle * Math.PI / 180));
+                  line.setAttribute("class", "svg-compass-line"); svg.appendChild(line);
+             });
+
+
+             // Compass Labels (Urdu and English)
+             const labelRadius = compassRadius + 10; // Position labels slightly further out
+
+             for (const angle in directionData) {
+                 if (directionData.hasOwnProperty(angle)) {
+                     const { ur, en } = directionData[angle];
+                      // Convert angle (0=N, 90=E) to SVG coords (0=E, 90=S) for point calculation, then rotate by -90
+                     const svgAngle = parseInt(angle) - 90;
+
+                     const labelX = compassCenterX + labelRadius * Math.cos(svgAngle * Math.PI / 180);
+                     const labelY = compassCenterY + labelRadius * Math.sin(svgAngle * Math.PI / 180);
+
+                     // Urdu Label
+                     const textUrdu = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                     textUrdu.setAttribute("x", labelX);
+                     textUrdu.setAttribute("y", labelY - 5); // Position Urdu slightly above English
+                     textUrdu.setAttribute("dominant-baseline", "middle");
+                     textUrdu.setAttribute("text-anchor", "middle");
+                     textUrdu.setAttribute("class", "svg-compass-label-urdu");
+                     textUrdu.textContent = ur;
+                     svg.appendChild(textUrdu);
+
+                      // English Label
+                     const textEn = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                     textEn.setAttribute("x", labelX);
+                     textEn.setAttribute("y", labelY + 10); // Position English slightly below Urdu
+                     textEn.setAttribute("dominant-baseline", "middle");
+                     textEn.setAttribute("text-anchor", "middle");
+                     textEn.setAttribute("class", "svg-compass-label-en");
+                     textEn.textContent = en;
+                     svg.appendChild(textEn);
+                 }
+             }
+
+             // Add a pointer for the target direction from the center of the compass
+             const pointerLength = compassRadius - 5; // Make pointer slightly shorter than inner radius
+             const pointerStartX = compassCenterX;
+             const pointerStartY = compassCenterY;
+
+             // Endpoint calculated using the target direction azimuth angle (0=N, 90=E)
+             // Convert to SVG coords (0=E, 90=S), then rotate by -90.
+             const pointerSvgAngle = azimuthAngle - 90;
+
+             const pointerEndX = pointerStartX + pointerLength * Math.cos(pointerSvgAngle * Math.PI / 180);
+             const pointerEndY = pointerStartY + pointerLength * Math.sin(pointerSvgAngle * Math.PI / 180);
+
+             const pointerLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+             pointerLine.setAttribute("x1", pointerStartX);
+             pointerLine.setAttribute("y1", pointerStartY);
+             pointerLine.setAttribute("x2", pointerEndX);
+             pointerLine.setAttribute("y2", pointerEndY);
+             pointerLine.setAttribute("class", "svg-compass-pointer");
+             svg.appendChild(pointerLine);
+
+
+            combinedVisualDiv.appendChild(svg);
+        }
+
+
+        // --- Main Calculation and Display Trigger ---
+
+        function triggerCalculation() {
+             if (currentLatitude !== null) {
+                 const selectedSeason = seasonSelect.value;
+                 const { direction, tilt, azimuth } = calculateSolarPanelSettings(currentLatitude, selectedSeason);
+
+                 // Update text results
+                 selectedSeasonDisplay.textContent = seasonLabelsUrdu[selectedSeason] || 'منتخب موسم'; // Show selected season text
+                 resultDirectionDiv.textContent = `تجویز کردہ سمت: ${direction}`;
+                 resultTiltDiv.textContent = `تجویز کردہ زاویہ (افقی سے): ${tilt}° ڈگری`;
+
+                 resultsCard.classList.remove('hidden');
+
+                 // Draw the visuals
+                 drawTiltSVG(tilt); // Draw only tilt
+                 drawDirectionSVG(azimuth); // Draw only direction
+                 drawCombinedSVG(tilt, direction, azimuth); // Draw combined
+
+
+             } else {
+                 // This case should ideally not happen if triggerCalculation is only called when lat is not null
+                 // But as a fallback:
+                 showLocationStatus('براہ کرم پہلے اپنی لوکیشن منتخب کریں یا حاصل کریں۔', true);
+                 resultsCard.classList.add('hidden');
+             }
+        }
+
+
+        // Listen for click on the calculate button
+        calculateBtn.addEventListener('click', triggerCalculation);
+
+
+        // --- Initial State ---
+        clearAllLocationInputsAndState(); // Set initial state to empty and disabled
+
+    </script>
+
+</body>
+</html>
